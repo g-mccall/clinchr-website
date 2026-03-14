@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinchr - Win the Agentic Commerce Revolution</title>
+    <meta name="description" content="Clinchr builds an intelligent agent layer that wins sales for retailers in the age of agentic commerce.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0f172a;
+            --blue: #38bdf8;
+            --green: #10b981;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-400: #94a3b8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--navy);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'League Spartan', sans-serif;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        /* ---- NAV ---- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(56, 189, 248, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+
+        .nav-logo-img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-cta {
+            display: inline-block;
+            padding: 0.6rem 1.4rem;
+            background: var(--green);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        /* ---- HERO ---- */
+        .hero {
+            background: var(--blue);
+            padding: 10rem 2rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--white);
+            clip-path: ellipse(55% 100% at 50% 100%);
+        }
+
+        .hero-content {
+            max-width: 720px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-logo-img {
+            height: 100px;
+            width: auto;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            color: var(--navy);
+            margin-bottom: 1.25rem;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--navy);
+            opacity: 0.8;
+            max-width: 560px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--green);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+        }
+
+        /* ---- PROBLEM ---- */
+        .problem {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--blue);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.35rem 0.9rem;
+            border-radius: 20px;
+            margin-bottom: 1.25rem;
+        }
+
+        .problem h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            margin-bottom: 1.5rem;
+            color: var(--navy);
+        }
+
+        .problem p {
+            font-size: 1.05rem;
+            color: var(--navy);
+            opacity: 0.75;
+            max-width: 640px;
+            margin-bottom: 1.25rem;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: var(--gray-100);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-family: 'League Spartan', sans-serif;
+            font-weight: 800;
+            font-size: 2.8rem;
+            color: var(--blue);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--navy);
+            opacity: 0.7;
+        }
+
+        /* ---- SOLUTION ---- */
+        .solution {
+            padding: 6rem 2rem;
+            background: var(--navy);
+            color: var(--white);
+            position: relative;
+        }
+
+        .solution .section-label {
+            color: var(--green);
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .solution h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .solution p {
+            font-size: 1.05rem;
+            color: var(--gray-400);
+            max-width: 560px;
+            margin-bottom: 1.25rem;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        /* Agent diagram */
+        .agent-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .diagram-node {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.9rem 1.3rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            min-width: 180px;
+        }
+
+        .diagram-node svg {
+            flex-shrink: 0;
+        }
+
+        .node-user {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--gray-400);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .node-buyer {
+            background: var(--blue);
+            color: var(--navy);
+        }
+
+        .node-clinchr {
+            background: var(--green);
+            color: var(--white);
+            padding: 1rem 1.4rem;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.25);
+        }
+
+        .node-catalog {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--gray-400);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .diagram-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.3rem 0;
+        }
+
+        .diagram-connector .line {
+            width: 2px;
+            height: 18px;
+            background: var(--gray-400);
+            opacity: 0.25;
+        }
+
+        .diagram-connector .arrow {
+            color: var(--gray-400);
+            opacity: 0.4;
+            font-size: 0.6rem;
+            line-height: 1;
+        }
+
+        /* Agent negotiation zone */
+        .agent-negotiation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            position: relative;
+        }
+
+        .negotiation-arrows {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .negotiation-arrows .arrow-down,
+        .negotiation-arrows .arrow-up {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+
+        .negotiation-arrows .arrow-down {
+            color: var(--blue);
+            opacity: 0.7;
+        }
+
+        .negotiation-arrows .arrow-up {
+            color: var(--green);
+            opacity: 0.7;
+        }
+
+        /* Fetch loop */
+        .fetch-connector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0;
+        }
+
+        .fetch-connector .fetch-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .fetch-connector .line {
+            width: 2px;
+            height: 14px;
+            background: var(--gray-400);
+            opacity: 0.25;
+        }
+
+        .fetch-connector .arrow {
+            color: var(--gray-400);
+            opacity: 0.4;
+            font-size: 0.6rem;
+            line-height: 1;
+        }
+
+        .fetch-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--green);
+            opacity: 0.6;
+        }
+
+        /* ---- FOOTER CTA ---- */
+        .footer-cta {
+            padding: 5rem 2rem;
+            background: var(--blue);
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-cta::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--navy);
+            clip-path: ellipse(55% 100% at 50% 0%);
+        }
+
+        .footer-cta h2 {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .footer-cta p {
+            font-size: 1.05rem;
+            color: var(--navy);
+            opacity: 0.7;
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            background: var(--navy);
+            color: var(--gray-400);
+            text-align: center;
+            padding: 1.5rem 2rem;
+            font-size: 0.85rem;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem 1.25rem;
+            }
+
+            .nav-logo-img {
+                height: 32px;
+            }
+
+            .hero {
+                padding: 8rem 1.5rem 5rem;
+            }
+
+            .hero-logo-img {
+                height: 72px;
+            }
+
+            .solution-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .agent-diagram {
+                order: -1;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-cta {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* ---- ANIMATIONS ---- */
+        @media (prefers-reduced-motion: no-preference) {
+            .stat-card,
+            .solution-grid {
+                opacity: 0;
+                transform: translateY(20px);
+                animation: fadeUp 0.6s ease forwards;
+            }
+
+            .stat-card:nth-child(1) { animation-delay: 0.1s; }
+            .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+    <a href="#" class="logo">
+        <img src="assets/logo.png" alt="Clinchr" class="nav-logo-img">
+    </a>
+    <a href="mailto:hello@clinchr.co" class="nav-cta">Get Early Access</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-logo">
+            <img src="assets/logo.png" alt="Clinchr" class="hero-logo-img">
+        </div>
+        <h1>Win sales in the age of agentic commerce</h1>
+        <p>The intelligent agent layer between purchasing AI and your products &mdash; so you clinch every sale.</p>
+        <a href="mailto:hello@clinchr.co?subject=Early%20Usage%20Enquiry" class="cta-btn">Enquire About Early Usage</a>
+    </div>
+</section>
+
+<!-- Problem -->
+<section class="problem">
+    <div class="container">
+        <span class="section-label">The Shift</span>
+        <h2>Shopping is changing</h2>
+        <p>AI agents are replacing websites as the way consumers find and buy products. Retailers need a new strategy to <strong>convert agent visits into sales.</strong></p>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-number">49%</div>
+                <div class="stat-label">of US shoppers already use ChatGPT to research products</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$5T</div>
+                <div class="stat-label">projected agentic commerce market by 2030 (McKinsey)</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Solution -->
+<section class="solution">
+    <div class="container">
+        <div class="solution-grid">
+            <div>
+                <span class="section-label">Our Solution</span>
+                <h2>Give your products their own sales agent</h2>
+                <p>Clinchr sits between purchasing agents and your catalog, negotiating and optimising the exact data that wins the sale.</p>
+                <p style="color: var(--green);">Powered by reinforcement learning.</p>
+            </div>
+            <div class="agent-diagram">
+                <!-- Consumer -->
+                <div class="diagram-node node-user">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1"/></svg>
+                    <span>Consumer</span>
+                </div>
+
+                <div class="diagram-connector">
+                    <div class="line"></div>
+                    <div class="arrow">&#9660;</div>
+                </div>
+
+                <!-- Purchasing Agent -->
+                <div class="diagram-node node-buyer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="4" width="14" height="12" rx="2"/><circle cx="9.5" cy="10" r="1"/><circle cx="14.5" cy="10" r="1"/><path d="M9 20h6"/><path d="M12 16v4"/></svg>
+                    <span>Purchasing Agent</span>
+                </div>
+
+                <!-- Agent-to-agent negotiation -->
+                <div class="agent-negotiation">
+                    <div class="negotiation-arrows">
+                        <div class="arrow-down">&#9660; product query</div>
+                    </div>
+                    <svg width="36" height="28" viewBox="0 0 36 28" fill="none">
+                        <rect x="2" y="8" width="10" height="10" rx="3" stroke="#38bdf8" stroke-width="1.5" fill="rgba(56,189,248,0.1)"/>
+                        <circle cx="5.5" cy="13" r="1" fill="#38bdf8"/>
+                        <circle cx="9.5" cy="13" r="1" fill="#38bdf8"/>
+                        <line x1="7" y1="4" x2="7" y2="8" stroke="#38bdf8" stroke-width="1.2" stroke-linecap="round"/>
+                        <circle cx="7" cy="3.5" r="1.2" fill="#38bdf8"/>
+                        <rect x="24" y="8" width="10" height="10" rx="3" stroke="#10b981" stroke-width="1.5" fill="rgba(16,185,129,0.1)"/>
+                        <circle cx="27.5" cy="13" r="1" fill="#10b981"/>
+                        <circle cx="31.5" cy="13" r="1" fill="#10b981"/>
+                        <line x1="29" y1="4" x2="29" y2="8" stroke="#10b981" stroke-width="1.2" stroke-linecap="round"/>
+                        <circle cx="29" cy="3.5" r="1.2" fill="#10b981"/>
+                        <path d="M14 11 Q18 9 22 11" stroke="#94a3b8" stroke-width="0.8" fill="none" opacity="0.5"/>
+                        <path d="M15 14 Q18 12 21 14" stroke="#94a3b8" stroke-width="0.8" fill="none" opacity="0.35"/>
+                        <path d="M14 17 Q18 15 22 17" stroke="#94a3b8" stroke-width="0.8" fill="none" opacity="0.2"/>
+                    </svg>
+                    <div class="negotiation-arrows">
+                        <div class="arrow-up">&#9650; optimised product</div>
+                    </div>
+                </div>
+
+                <!-- Clinchr Agent -->
+                <div class="diagram-node node-clinchr">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="4" width="14" height="12" rx="2"/><circle cx="9.5" cy="10" r="1"/><circle cx="14.5" cy="10" r="1"/><path d="M9 20h6"/><path d="M12 16v4"/></svg>
+                    <span>Clinchr Agent</span>
+                </div>
+
+                <!-- Fetch from catalog -->
+                <div class="fetch-connector">
+                    <div class="fetch-arrow">
+                        <div class="line"></div>
+                        <div class="arrow">&#9660;</div>
+                    </div>
+                    <span class="fetch-label">fetches</span>
+                    <div class="fetch-arrow">
+                        <div class="arrow" style="transform: rotate(180deg);">&#9660;</div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+
+                <!-- Catalog -->
+                <div class="diagram-node node-catalog">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/><rect x="2" y="3" width="20" height="18" rx="2"/></svg>
+                    <span>Your Product Catalog</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer CTA -->
+<section class="footer-cta">
+    <h2>Ready to clinch agentic sales?</h2>
+    <a href="mailto:hello@clinchr.co?subject=Early%20Usage%20Enquiry" class="cta-btn">Enquire About Early Usage</a>
+</section>
+
+<footer>
+    &copy; 2026 Clinchr. All rights reserved.
+</footer>
+
+</body>
+</html>
