@@ -137,7 +137,7 @@
             color: var(--text-primary);
             text-decoration: none;
             border: 1px solid var(--border-medium);
-            border-radius: 8px;
+            border-radius: 200px;
             font-weight: 500;
             font-size: 0.85rem;
             letter-spacing: -0.01em;
@@ -168,7 +168,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 8rem 2rem 6rem;
+            padding: 10rem 2rem 8rem;
             position: relative;
             overflow: hidden;
         }
@@ -274,7 +274,7 @@
             font-size: clamp(1rem, 2vw, 1.2rem);
             color: var(--text-secondary);
             max-width: 520px;
-            margin: 0 auto 3rem;
+            margin: 0 auto 3.5rem;
             font-weight: 300;
             line-height: 1.7;
         }
@@ -295,7 +295,7 @@
             background: linear-gradient(135deg, #00d4ff 0%, #00b4e6 100%);
             color: var(--bg-primary);
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 200px;
             font-family: 'Outfit', sans-serif;
             font-weight: 600;
             font-size: 1rem;
@@ -413,7 +413,7 @@
 
         /* ---- PROBLEM SECTION ---- */
         .problem {
-            padding: 8rem 0;
+            padding: 10rem 0;
             position: relative;
         }
 
@@ -477,7 +477,10 @@
         .stat-card:hover {
             border-color: var(--border-medium);
             transform: translateY(-4px);
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
+            box-shadow:
+                0 4px 8px rgba(0, 0, 0, 0.15),
+                0 12px 24px rgba(0, 0, 0, 0.2),
+                0 32px 64px rgba(0, 0, 0, 0.25);
         }
 
         .stat-number {
@@ -523,15 +526,19 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
-            margin-top: 3.5rem;
+            margin-top: 4.5rem;
         }
 
         .compare-card {
-            padding: 2rem 1.75rem;
+            padding: 2.25rem 2rem;
             border-radius: 16px;
             border: 1px solid var(--border-subtle);
             position: relative;
             transition: all 0.5s var(--ease-out-expo);
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.08),
+                0 8px 16px rgba(0, 0, 0, 0.12),
+                0 24px 48px rgba(0, 0, 0, 0.16);
         }
 
         .compare-card__header {
@@ -617,7 +624,11 @@
         .compare-card--clinchr {
             background: rgba(0, 230, 138, 0.03);
             border-color: rgba(0, 230, 138, 0.15);
-            box-shadow: 0 0 40px rgba(0, 230, 138, 0.04);
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.08),
+                0 8px 16px rgba(0, 0, 0, 0.12),
+                0 24px 48px rgba(0, 0, 0, 0.16),
+                0 0 40px rgba(0, 230, 138, 0.04);
         }
 
         .compare-card--clinchr::before {
@@ -655,7 +666,7 @@
 
         /* ---- SOLUTION SECTION ---- */
         .solution {
-            padding: 8rem 0;
+            padding: 10rem 0;
             position: relative;
             background: var(--bg-secondary);
         }
@@ -795,7 +806,10 @@
 
         .flow-node--clinchr {
             border-color: rgba(0, 230, 138, 0.2);
-            box-shadow: 0 0 40px rgba(0, 230, 138, 0.06);
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.1),
+                0 8px 16px rgba(0, 0, 0, 0.12),
+                0 0 40px rgba(0, 230, 138, 0.06);
         }
 
         .flow-node--clinchr .flow-node__icon {
@@ -958,7 +972,7 @@
 
         /* ---- FOOTER CTA ---- */
         .footer-cta {
-            padding: 10rem 0 8rem;
+            padding: 12rem 0 10rem;
             text-align: center;
             position: relative;
             overflow: hidden;
