@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clinchr - Win the Agentic Commerce Revolution</title>
+    <title>Clinchr — Win the Agentic Commerce Revolution</title>
     <meta name="description" content="Clinchr builds an intelligent agent layer that wins sales for retailers in the age of agentic commerce.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -16,12 +16,20 @@
         }
 
         :root {
-            --navy: #0f172a;
-            --blue: #38bdf8;
-            --green: #10b981;
-            --white: #ffffff;
-            --gray-100: #f1f5f9;
-            --gray-400: #94a3b8;
+            --bg-primary: #060a13;
+            --bg-secondary: #0a1021;
+            --bg-elevated: #0e1628;
+            --bg-card: rgba(14, 22, 40, 0.5);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-medium: rgba(255, 255, 255, 0.1);
+            --accent-cyan: #00d4ff;
+            --accent-green: #00e68a;
+            --accent-cyan-dim: rgba(0, 212, 255, 0.12);
+            --accent-green-dim: rgba(0, 230, 138, 0.12);
+            --text-primary: #edf0f5;
+            --text-secondary: #8892a4;
+            --text-muted: #4a5568;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         html {
@@ -29,16 +37,36 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            color: var(--navy);
-            line-height: 1.6;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.65;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         h1, h2, h3 {
-            font-family: 'League Spartan', sans-serif;
-            font-weight: 800;
-            line-height: 1.1;
+            font-family: 'Instrument Serif', serif;
+            font-weight: 400;
+            line-height: 1.15;
+        }
+
+        /* ---- GRAIN OVERLAY ---- */
+        .grain {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            opacity: 0.35;
+        }
+
+        /* ---- LUMINOUS DIVIDERS ---- */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--accent-cyan) 30%, var(--accent-green) 70%, transparent 100%);
+            opacity: 0.15;
         }
 
         /* ---- NAV ---- */
@@ -48,593 +76,1299 @@
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 1rem 2rem;
+            padding: 1.25rem 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(56, 189, 248, 0.95);
-            backdrop-filter: blur(10px);
+            background: transparent;
+            border-bottom: 1px solid transparent;
+            transition: all 0.5s var(--ease-out-expo);
+        }
+
+        nav.scrolled {
+            background: rgba(6, 10, 19, 0.88);
+            backdrop-filter: blur(24px) saturate(1.4);
+            -webkit-backdrop-filter: blur(24px) saturate(1.4);
+            border-bottom-color: var(--border-subtle);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.75rem;
             text-decoration: none;
         }
 
-        .nav-logo-img {
-            height: 40px;
-            width: auto;
-            display: block;
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-icon--nav svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo-text {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
         }
 
         .nav-cta {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             padding: 0.6rem 1.4rem;
-            background: var(--green);
-            color: var(--white);
+            background: transparent;
+            color: var(--text-primary);
             text-decoration: none;
+            border: 1px solid var(--border-medium);
             border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: -0.01em;
+            transition: all 0.35s var(--ease-out-expo);
         }
 
         .nav-cta:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            box-shadow: 0 0 24px rgba(0, 230, 138, 0.1);
+        }
+
+        .nav-cta svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.35s var(--ease-out-expo);
+        }
+
+        .nav-cta:hover svg {
+            transform: translateX(2px);
         }
 
         /* ---- HERO ---- */
         .hero {
-            background: var(--blue);
-            padding: 10rem 2rem 6rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            padding: 8rem 2rem 6rem;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::after {
-            content: '';
+        .hero-bg {
             position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: var(--white);
-            clip-path: ellipse(55% 100% at 50% 100%);
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 25% 40%, rgba(0, 212, 255, 0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 50% at 75% 30%, rgba(0, 230, 138, 0.05) 0%, transparent 70%),
+                radial-gradient(ellipse 90% 40% at 50% 90%, rgba(0, 212, 255, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.025) 1px, transparent 1px);
+            background-size: 72px 72px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent);
+            pointer-events: none;
+        }
+
+        .hero-glow-1, .hero-glow-2 {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+        }
+
+        .hero-glow-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--accent-cyan);
+            opacity: 0.06;
+            top: -15%;
+            right: -5%;
+            animation: drift 25s ease-in-out infinite;
+        }
+
+        .hero-glow-2 {
+            width: 450px;
+            height: 450px;
+            background: var(--accent-green);
+            opacity: 0.04;
+            bottom: 5%;
+            left: -5%;
+            animation: drift 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(25px, -20px) scale(1.05); }
+            66% { transform: translate(-15px, 15px) scale(0.95); }
         }
 
         .hero-content {
-            max-width: 720px;
-            margin: 0 auto;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            max-width: 800px;
         }
 
         .hero-logo {
+            margin-bottom: 3rem;
+        }
+
+        .hero-logo-mark {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 1rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .hero-logo-img {
-            height: 100px;
-            width: auto;
-            display: block;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            color: var(--navy);
-            margin-bottom: 1.25rem;
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            color: var(--navy);
-            opacity: 0.8;
-            max-width: 560px;
-            margin: 0 auto 2.5rem;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--green);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
-        }
-
-        /* ---- PROBLEM ---- */
-        .problem {
-            padding: 6rem 2rem;
-            background: var(--white);
-        }
-
-        .container {
-            max-width: 960px;
             margin: 0 auto;
         }
 
-        .section-label {
-            display: inline-block;
-            font-size: 0.8rem;
+        .hero-logo-mark svg {
+            width: 60px;
+            height: 60px;
+            filter: drop-shadow(0 0 24px rgba(0, 230, 138, 0.15));
+        }
+
+        .hero-logo-mark .hero-brand {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 2.6rem;
+            color: var(--text-primary);
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 4.2rem);
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(180deg, #ffffff 20%, #b4c7d9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 1rem 2.4rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #00b4e6 100%);
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
             font-weight: 600;
-            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: -0.01em;
+            transition: all 0.4s var(--ease-out-expo);
+            box-shadow: 0 0 24px rgba(0, 212, 255, 0.12), 0 1px 2px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+            animation: btnShine 5s ease-in-out infinite;
+        }
+
+        @keyframes btnShine {
+            0%, 70%, 100% { left: -100%; }
+            35% { left: 100%; }
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 56px rgba(0, 212, 255, 0.3), 0 12px 40px rgba(0, 212, 255, 0.15), 0 0 0 1px rgba(0, 212, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.35s var(--ease-out-expo);
+        }
+
+        .btn-primary:hover svg {
+            transform: translateX(3px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
             letter-spacing: 0.1em;
-            color: var(--blue);
-            background: rgba(56, 189, 248, 0.1);
-            padding: 0.35rem 0.9rem;
-            border-radius: 20px;
-            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+        }
+
+        .hero-scroll .scroll-line {
+            width: 1px;
+            height: 32px;
+            background: linear-gradient(to bottom, var(--text-muted), transparent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-scroll .scroll-line::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 8px;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 6px var(--accent-cyan);
+            border-radius: 2px;
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0% { top: -8px; opacity: 0; }
+            40% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* ---- SECTIONS COMMON ---- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 2rem;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.6;
+        }
+
+        .section-label--green {
+            color: var(--accent-green);
+        }
+
+        /* ---- PROBLEM SECTION ---- */
+        .problem {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .problem-inner {
+            max-width: 640px;
         }
 
         .problem h2 {
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            letter-spacing: -0.02em;
             margin-bottom: 1.5rem;
-            color: var(--navy);
+            color: var(--text-primary);
         }
 
-        .problem p {
-            font-size: 1.05rem;
-            color: var(--navy);
-            opacity: 0.75;
-            max-width: 640px;
-            margin-bottom: 1.25rem;
+        .problem-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.75;
+            margin-bottom: 0.75rem;
+        }
+
+        .problem-text strong {
+            color: var(--text-primary);
+            font-weight: 500;
         }
 
         .stats-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
-            margin-top: 3rem;
+            margin-top: 4rem;
         }
 
         .stat-card {
-            background: var(--gray-100);
+            position: relative;
+            padding: 2.5rem 2rem;
             border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            transition: transform 0.2s;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.5s var(--ease-out-expo);
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), transparent, rgba(0, 230, 138, 0.1));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
         }
 
         .stat-card:hover {
+            border-color: var(--border-medium);
             transform: translateY(-4px);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
         }
 
         .stat-number {
-            font-family: 'League Spartan', sans-serif;
-            font-weight: 800;
-            font-size: 2.8rem;
-            color: var(--blue);
+            font-family: 'Instrument Serif', serif;
+            font-size: 3.5rem;
             line-height: 1;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.03em;
+        }
+
+        .stat-card:nth-child(1) .stat-number {
+            background: linear-gradient(135deg, var(--accent-cyan), #66e0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card:nth-child(2) .stat-number {
+            background: linear-gradient(135deg, var(--accent-green), #66ffbb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-label {
-            font-size: 0.95rem;
-            color: var(--navy);
-            opacity: 0.7;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.55;
         }
 
-        /* ---- SOLUTION ---- */
-        .solution {
-            padding: 6rem 2rem;
-            background: var(--navy);
-            color: var(--white);
+        .stat-source {
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        /* ---- COMPARISON CARDS ---- */
+        .compare-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 3.5rem;
+        }
+
+        .compare-card {
+            padding: 2rem 1.75rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
             position: relative;
+            transition: all 0.5s var(--ease-out-expo);
         }
 
-        .solution .section-label {
-            color: var(--green);
-            background: rgba(16, 185, 129, 0.15);
+        .compare-card__header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
         }
 
-        .solution h2 {
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
-            color: var(--white);
-            margin-bottom: 1.5rem;
+        .compare-card__tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
         }
 
-        .solution p {
-            font-size: 1.05rem;
-            color: var(--gray-400);
-            max-width: 560px;
+        .compare-card__title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .compare-card__desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
             margin-bottom: 1.25rem;
+            font-weight: 300;
+        }
+
+        .compare-card__list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+        }
+
+        .compare-card__list li {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .compare-card__list li::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* GEO card — muted / faded */
+        .compare-card--geo {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .compare-card--geo .compare-card__tag {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+        }
+
+        .compare-card--geo .compare-card__desc {
+            color: var(--text-muted);
+        }
+
+        .compare-card--geo .compare-card__list li {
+            color: var(--text-muted);
+        }
+
+        .compare-card--geo .compare-card__list li::before {
+            background: var(--text-muted);
+            opacity: 0.4;
+        }
+
+        /* Clinchr card — highlighted / glowing */
+        .compare-card--clinchr {
+            background: rgba(0, 230, 138, 0.03);
+            border-color: rgba(0, 230, 138, 0.15);
+            box-shadow: 0 0 40px rgba(0, 230, 138, 0.04);
+        }
+
+        .compare-card--clinchr::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0, 230, 138, 0.2), transparent 60%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .compare-card--clinchr .compare-card__tag {
+            background: var(--accent-green-dim);
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 230, 138, 0.2);
+        }
+
+        .compare-card--clinchr .compare-card__desc {
+            color: var(--text-secondary);
+        }
+
+        .compare-card--clinchr .compare-card__list li {
+            color: var(--text-primary);
+        }
+
+        .compare-card--clinchr .compare-card__list li::before {
+            background: var(--accent-green);
+            box-shadow: 0 0 6px var(--accent-green);
+        }
+
+        /* ---- SOLUTION SECTION ---- */
+        .solution {
+            padding: 8rem 0;
+            position: relative;
+            background: var(--bg-secondary);
         }
 
         .solution-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 6rem;
             align-items: center;
-            margin-top: 2rem;
         }
 
-        /* Agent diagram */
-        .agent-diagram {
+        .solution h2 {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .solution-text {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.75;
+            margin-bottom: 1rem;
+        }
+
+        .solution-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent-green);
+            letter-spacing: 0.02em;
+            margin-top: 0.5rem;
+        }
+
+        .solution-highlight::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-green);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* ---- AGENT FLOW DIAGRAM ---- */
+        .flow {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 0;
-        }
-
-        .diagram-node {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.9rem 1.3rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            min-width: 180px;
-        }
-
-        .diagram-node svg {
-            flex-shrink: 0;
-        }
-
-        .node-user {
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--gray-400);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-
-        .node-buyer {
-            background: var(--blue);
-            color: var(--navy);
-        }
-
-        .node-clinchr {
-            background: var(--green);
-            color: var(--white);
-            padding: 1rem 1.4rem;
-            box-shadow: 0 0 30px rgba(16, 185, 129, 0.25);
-        }
-
-        .node-catalog {
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--gray-400);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-
-        .diagram-connector {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0.3rem 0;
-        }
-
-        .diagram-connector .line {
-            width: 2px;
-            height: 18px;
-            background: var(--gray-400);
-            opacity: 0.25;
-        }
-
-        .diagram-connector .arrow {
-            color: var(--gray-400);
-            opacity: 0.4;
-            font-size: 0.6rem;
-            line-height: 1;
-        }
-
-        /* Agent negotiation zone */
-        .agent-negotiation {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            padding: 0.75rem 0;
             position: relative;
         }
 
-        .negotiation-arrows {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.35rem;
-        }
-
-        .negotiation-arrows .arrow-down,
-        .negotiation-arrows .arrow-up {
+        .flow-node {
             display: flex;
             align-items: center;
-            gap: 0.3rem;
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 0.01em;
+            gap: 0.85rem;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            min-width: 210px;
+            position: relative;
+            transition: all 0.4s var(--ease-out-expo);
         }
 
-        .negotiation-arrows .arrow-down {
-            color: var(--blue);
-            opacity: 0.7;
+        .flow-node:hover {
+            border-color: var(--border-medium);
         }
 
-        .negotiation-arrows .arrow-up {
-            color: var(--green);
-            opacity: 0.7;
-        }
-
-        /* Fetch loop */
-        .fetch-connector {
+        .flow-node__icon {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.4rem 0;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            flex-shrink: 0;
         }
 
-        .fetch-connector .fetch-arrow {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .flow-node__label {
+            font-weight: 500;
+            font-size: 0.88rem;
+            letter-spacing: -0.01em;
         }
 
-        .fetch-connector .line {
-            width: 2px;
-            height: 14px;
-            background: var(--gray-400);
-            opacity: 0.25;
-        }
-
-        .fetch-connector .arrow {
-            color: var(--gray-400);
-            opacity: 0.4;
+        .flow-node__badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-family: 'DM Mono', monospace;
             font-size: 0.6rem;
+            font-weight: 500;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            letter-spacing: 0.03em;
+        }
+
+        .flow-node--consumer .flow-node__icon {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .flow-node--consumer .flow-node__icon svg {
+            stroke: var(--text-secondary);
+        }
+
+        .flow-node--consumer .flow-node__label {
+            color: var(--text-secondary);
+        }
+
+        .flow-node--buyer {
+            border-color: rgba(0, 212, 255, 0.15);
+        }
+
+        .flow-node--buyer .flow-node__icon {
+            background: var(--accent-cyan-dim);
+        }
+
+        .flow-node--buyer .flow-node__icon svg {
+            stroke: var(--accent-cyan);
+        }
+
+        .flow-node--buyer .flow-node__label {
+            color: var(--accent-cyan);
+        }
+
+        .flow-node--clinchr {
+            border-color: rgba(0, 230, 138, 0.2);
+            box-shadow: 0 0 40px rgba(0, 230, 138, 0.06);
+        }
+
+        .flow-node--clinchr .flow-node__icon {
+            background: var(--accent-green-dim);
+        }
+
+        .flow-node--clinchr .flow-node__icon svg {
+            stroke: var(--accent-green);
+        }
+
+        .flow-node--clinchr .flow-node__label {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .flow-node--clinchr .flow-node__badge {
+            background: var(--accent-green-dim);
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 230, 138, 0.2);
+        }
+
+        .flow-node--catalog .flow-node__icon {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .flow-node--catalog .flow-node__icon svg {
+            stroke: var(--text-secondary);
+        }
+
+        .flow-node--catalog .flow-node__label {
+            color: var(--text-secondary);
+        }
+
+        /* Flow connectors */
+        .flow-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            padding: 0.25rem 0;
+        }
+
+        .flow-line {
+            width: 1px;
+            height: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flow-line::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--border-medium);
+        }
+
+        .flow-line::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            left: -1px;
+            height: 10px;
+            border-radius: 2px;
+            animation: flowDown 2.2s ease-in-out infinite;
+        }
+
+        .flow-line--cyan::after {
+            background: var(--accent-cyan);
+            box-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .flow-line--green::after {
+            background: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+        }
+
+        @keyframes flowDown {
+            0% { top: -10px; opacity: 0; }
+            30% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        .flow-arrow {
+            color: var(--text-muted);
+            font-size: 0.5rem;
             line-height: 1;
         }
 
-        .fetch-label {
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: var(--green);
+        /* Negotiation zone */
+        .flow-negotiation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem 2rem;
+            position: relative;
+            margin: 0.15rem 0;
+        }
+
+        .flow-negotiation::before {
+            content: '';
+            position: absolute;
+            inset: -4px -12px;
+            border: 1px dashed rgba(0, 212, 255, 0.12);
+            border-radius: 14px;
+            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.02), transparent 70%);
+        }
+
+        .flow-negotiation__label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.35rem 0;
+        }
+
+        .flow-negotiation__arrows {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.15rem 0;
+        }
+
+        .flow-negotiation__arrow-down {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--accent-cyan);
             opacity: 0.6;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .flow-negotiation__arrow-up {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--accent-green);
+            opacity: 0.6;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Fetch connector */
+        .flow-fetch {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0;
+        }
+
+        .flow-fetch__label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--accent-green);
+            opacity: 0.5;
+            letter-spacing: 0.05em;
         }
 
         /* ---- FOOTER CTA ---- */
         .footer-cta {
-            padding: 5rem 2rem;
-            background: var(--blue);
+            padding: 10rem 0 8rem;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
 
-        .footer-cta::before {
-            content: '';
+        .footer-cta-bg {
             position: absolute;
-            top: -2px;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: var(--navy);
-            clip-path: ellipse(55% 100% at 50% 0%);
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 50% 60%, rgba(0, 230, 138, 0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 30% 40%, rgba(0, 212, 255, 0.04) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .footer-cta h2 {
-            font-size: clamp(1.6rem, 4vw, 2.4rem);
-            color: var(--navy);
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            letter-spacing: -0.03em;
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(180deg, #ffffff 20%, #b4c7d9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .footer-cta p {
+        .footer-cta-sub {
             font-size: 1.05rem;
-            color: var(--navy);
-            opacity: 0.7;
-            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
         }
 
-        footer {
-            background: var(--navy);
-            color: var(--gray-400);
-            text-align: center;
-            padding: 1.5rem 2rem;
-            font-size: 0.85rem;
+        .footer-cta .btn-primary {
+            position: relative;
+            z-index: 1;
         }
+
+        /* ---- FOOTER ---- */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0.03em;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        /* ---- REVEAL ANIMATIONS ---- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
 
         /* ---- RESPONSIVE ---- */
+        @media (max-width: 900px) {
+            .solution-grid {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+            }
+
+            .flow {
+                order: -1;
+            }
+        }
+
         @media (max-width: 768px) {
             nav {
-                padding: 0.8rem 1.25rem;
+                padding: 1rem 1.25rem;
             }
 
             .nav-logo-img {
-                height: 32px;
+                height: 30px;
+            }
+
+            .logo-text {
+                font-size: 1rem;
             }
 
             .hero {
-                padding: 8rem 1.5rem 5rem;
+                padding: 7rem 1.5rem 5rem;
+                min-height: auto;
             }
 
             .hero-logo-img {
-                height: 72px;
+                height: 56px;
             }
 
-            .solution-grid {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 2.8rem);
             }
 
-            .agent-diagram {
-                order: -1;
+            .hero-scroll {
+                display: none;
+            }
+
+            .problem, .solution, .footer-cta {
+                padding: 5rem 0;
             }
 
             .stats-row {
                 grid-template-columns: 1fr;
             }
 
+            .compare-row {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2.8rem;
+            }
+
+            .solution-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
             .nav-cta {
                 padding: 0.5rem 1rem;
                 font-size: 0.8rem;
             }
-        }
 
-        /* ---- ANIMATIONS ---- */
-        @media (prefers-reduced-motion: no-preference) {
-            .stat-card,
-            .solution-grid {
-                opacity: 0;
-                transform: translateY(20px);
-                animation: fadeUp 0.6s ease forwards;
+            .footer-cta {
+                padding: 6rem 0 5rem;
             }
-
-            .stat-card:nth-child(1) { animation-delay: 0.1s; }
-            .stat-card:nth-child(2) { animation-delay: 0.2s; }
         }
 
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        @media (max-width: 480px) {
+            .hero-cta-group {
+                flex-direction: column;
+            }
+        }
+
+        /* ---- PREFERS REDUCED MOTION ---- */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
 <body>
 
+<!-- Grain overlay -->
+<svg class="grain" width="100%" height="100%">
+    <filter id="grain-filter">
+        <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" stitchTiles="stitch"/>
+        <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grain-filter)" opacity="0.04"/>
+</svg>
+
 <!-- Nav -->
 <nav>
-    <a href="#" class="logo">
-        <img src="assets/logo.png" alt="Clinchr" class="nav-logo-img">
-    </a>
-    <a href="mailto:enquiries@clinchr.ai" class="nav-cta">Get Early Access</a>
+    <div class="nav-inner">
+        <a href="#" class="logo">
+            <span class="logo-icon logo-icon--nav">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Bag body (wide trapezoid shape) -->
+                    <path d="M8 17h32l-3 23a3 3 0 0 1-3 3H14a3 3 0 0 1-3-3L8 17z" fill="white"/>
+                    <!-- Flat top rim -->
+                    <rect x="7" y="15" width="34" height="4" rx="1.5" fill="white"/>
+                    <!-- Handle (thin arch) -->
+                    <path d="M18 15V11a6 6 0 0 1 12 0v4" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+                    <!-- Happy closed eyes -->
+                    <path d="M16 28c1-2 3-2 4 0" stroke="var(--bg-primary)" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+                    <path d="M28 28c1-2 3-2 4 0" stroke="var(--bg-primary)" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+                </svg>
+            </span>
+            <span class="logo-text">Clinchr</span>
+        </a>
+        <a href="mailto:enquiries@clinchr.ai" class="nav-cta">
+            Request Early Access
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg>
+        </a>
+    </div>
 </nav>
 
 <!-- Hero -->
 <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+
     <div class="hero-content">
-        <div class="hero-logo">
-            <img src="assets/logo.png" alt="Clinchr" class="hero-logo-img">
-        </div>
         <h1>Win sales in the age of agentic commerce</h1>
-        <p>The intelligent agent layer between purchasing AI and your products &mdash; so you clinch every sale.</p>
-        <a href="mailto:enquiries@clinchr.ai?subject=Early%20Usage%20Enquiry" class="cta-btn">Enquire About Early Usage</a>
+        <p class="hero-sub">The intelligent agent layer between purchasing AI and your products&mdash;so&nbsp;you clinch every sale.</p>
+        <div class="hero-cta-group">
+            <a href="mailto:enquiries@clinchr.ai?subject=Early%20Usage%20Enquiry" class="btn-primary">
+                Request Early Access
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg>
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
     </div>
 </section>
+
+<div class="divider"></div>
 
 <!-- Problem -->
 <section class="problem">
     <div class="container">
-        <span class="section-label">The Shift</span>
-        <h2>Shopping is changing</h2>
-        <p>AI agents are replacing websites as the way consumers find and buy products. Retailers need a new strategy to <strong>convert agent visits into sales.</strong></p>
+        <div class="problem-inner reveal">
+            <span class="section-label">Beyond GEO</span>
+            <h2>The market is moving beyond static optimisation</h2>
+            <p class="problem-text">49% of US shoppers already use ChatGPT to research products. Generative Engine Optimisation helps you appear in those results&mdash;but <strong>appearing isn&rsquo;t enough.</strong></p>
+            <p class="problem-text">As AI agents take over purchasing decisions, you need more than visibility. You need <strong>your product to be chosen.</strong></p>
+        </div>
 
-        <div class="stats-row">
-            <div class="stat-card">
-                <div class="stat-number">49%</div>
-                <div class="stat-label">of US shoppers already use ChatGPT to research products</div>
+        <div class="compare-row">
+            <div class="compare-card compare-card--geo reveal reveal-delay-1">
+                <div class="compare-card__header">
+                    <span class="compare-card__tag">GEO</span>
+                    <span class="compare-card__title">Generative Engine Optimisation</span>
+                </div>
+                <p class="compare-card__desc">Optimises your content to appear in AI-generated answers and recommendations</p>
+                <ul class="compare-card__list">
+                    <li>Passive optimisation</li>
+                    <li>Visibility-focused</li>
+                    <li>Static content</li>
+                </ul>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">$5T</div>
-                <div class="stat-label">projected agentic commerce market by 2030 (McKinsey)</div>
+            <div class="compare-card compare-card--clinchr reveal reveal-delay-2">
+                <div class="compare-card__header">
+                    <span class="compare-card__tag">Clinchr</span>
+                    <span class="compare-card__title">Agentic Sales Layer</span>
+                </div>
+                <p class="compare-card__desc">An intelligent agent that negotiates with purchasing AI to win the sale in real time</p>
+                <ul class="compare-card__list">
+                    <li>Active negotiation</li>
+                    <li>Conversion-focused</li>
+                    <li>Dynamic &amp; real-time</li>
+                </ul>
             </div>
         </div>
     </div>
 </section>
+
+<div class="divider"></div>
 
 <!-- Solution -->
 <section class="solution">
     <div class="container">
         <div class="solution-grid">
-            <div>
-                <span class="section-label">Our Solution</span>
+            <div class="reveal">
+                <span class="section-label section-label--green">Our Solution</span>
                 <h2>Give your products their own sales agent</h2>
-                <p>Clinchr sits between purchasing agents and your catalog, negotiating and optimising the exact data that wins the sale.</p>
-                <p style="color: var(--green);">Powered by reinforcement learning.</p>
+                <p class="solution-text">Clinchr sits between purchasing agents and your catalog, negotiating and optimising the exact data that wins the sale.</p>
+                <div class="solution-highlight">
+                    <span>Powered by reinforcement learning</span>
+                </div>
+                <div class="solution-highlight">
+                    <span>Built for OpenAI's ACP &amp; Google's UCP</span>
+                </div>
             </div>
-            <div class="agent-diagram">
+
+            <div class="flow reveal reveal-delay-2">
                 <!-- Consumer -->
-                <div class="diagram-node node-user">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1"/></svg>
-                    <span>Consumer</span>
+                <div class="flow-node flow-node--consumer">
+                    <div class="flow-node__icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1"/></svg>
+                    </div>
+                    <span class="flow-node__label">Consumer</span>
                 </div>
 
-                <div class="diagram-connector">
-                    <div class="line"></div>
-                    <div class="arrow">&#9660;</div>
+                <div class="flow-connector">
+                    <div class="flow-line flow-line--cyan"></div>
+                    <span class="flow-arrow">&#9662;</span>
                 </div>
 
                 <!-- Purchasing Agent -->
-                <div class="diagram-node node-buyer">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="4" width="14" height="12" rx="2"/><circle cx="9.5" cy="10" r="1"/><circle cx="14.5" cy="10" r="1"/><path d="M9 20h6"/><path d="M12 16v4"/></svg>
-                    <span>Purchasing Agent</span>
+                <div class="flow-node flow-node--buyer">
+                    <div class="flow-node__icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="4" width="14" height="12" rx="2"/><circle cx="9.5" cy="10" r="1"/><circle cx="14.5" cy="10" r="1"/><path d="M9 20h6"/><path d="M12 16v4"/></svg>
+                    </div>
+                    <span class="flow-node__label">Purchasing Agent</span>
                 </div>
 
-                <!-- Agent-to-agent negotiation -->
-                <div class="agent-negotiation">
-                    <div class="negotiation-arrows">
-                        <div class="arrow-down">&#9660; product query</div>
+                <!-- Negotiation zone -->
+                <div class="flow-negotiation">
+                    <div class="flow-negotiation__arrows">
+                        <span class="flow-negotiation__arrow-down">&#9662; query</span>
+                        <span class="flow-negotiation__arrow-up">&#9652; optimised</span>
                     </div>
-                    <svg width="36" height="28" viewBox="0 0 36 28" fill="none">
-                        <rect x="2" y="8" width="10" height="10" rx="3" stroke="#38bdf8" stroke-width="1.5" fill="rgba(56,189,248,0.1)"/>
-                        <circle cx="5.5" cy="13" r="1" fill="#38bdf8"/>
-                        <circle cx="9.5" cy="13" r="1" fill="#38bdf8"/>
-                        <line x1="7" y1="4" x2="7" y2="8" stroke="#38bdf8" stroke-width="1.2" stroke-linecap="round"/>
-                        <circle cx="7" cy="3.5" r="1.2" fill="#38bdf8"/>
-                        <rect x="24" y="8" width="10" height="10" rx="3" stroke="#10b981" stroke-width="1.5" fill="rgba(16,185,129,0.1)"/>
-                        <circle cx="27.5" cy="13" r="1" fill="#10b981"/>
-                        <circle cx="31.5" cy="13" r="1" fill="#10b981"/>
-                        <line x1="29" y1="4" x2="29" y2="8" stroke="#10b981" stroke-width="1.2" stroke-linecap="round"/>
-                        <circle cx="29" cy="3.5" r="1.2" fill="#10b981"/>
-                        <path d="M14 11 Q18 9 22 11" stroke="#94a3b8" stroke-width="0.8" fill="none" opacity="0.5"/>
-                        <path d="M15 14 Q18 12 21 14" stroke="#94a3b8" stroke-width="0.8" fill="none" opacity="0.35"/>
-                        <path d="M14 17 Q18 15 22 17" stroke="#94a3b8" stroke-width="0.8" fill="none" opacity="0.2"/>
-                    </svg>
-                    <div class="negotiation-arrows">
-                        <div class="arrow-up">&#9650; optimised product</div>
-                    </div>
+                    <div class="flow-negotiation__label">agent-to-agent negotiation</div>
                 </div>
 
                 <!-- Clinchr Agent -->
-                <div class="diagram-node node-clinchr">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="4" width="14" height="12" rx="2"/><circle cx="9.5" cy="10" r="1"/><circle cx="14.5" cy="10" r="1"/><path d="M9 20h6"/><path d="M12 16v4"/></svg>
-                    <span>Clinchr Agent</span>
+                <div class="flow-node flow-node--clinchr">
+                    <div class="flow-node__icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="4" width="14" height="12" rx="2"/><circle cx="9.5" cy="10" r="1"/><circle cx="14.5" cy="10" r="1"/><path d="M9 20h6"/><path d="M12 16v4"/></svg>
+                    </div>
+                    <span class="flow-node__label">Clinchr Agent</span>
+                    <span class="flow-node__badge">RL-powered</span>
                 </div>
 
-                <!-- Fetch from catalog -->
-                <div class="fetch-connector">
-                    <div class="fetch-arrow">
-                        <div class="line"></div>
-                        <div class="arrow">&#9660;</div>
+                <div class="flow-fetch">
+                    <div class="flow-connector">
+                        <div class="flow-line flow-line--green"></div>
+                        <span class="flow-arrow">&#9662;</span>
                     </div>
-                    <span class="fetch-label">fetches</span>
-                    <div class="fetch-arrow">
-                        <div class="arrow" style="transform: rotate(180deg);">&#9660;</div>
-                        <div class="line"></div>
-                    </div>
+                    <span class="flow-fetch__label">fetches</span>
                 </div>
 
                 <!-- Catalog -->
-                <div class="diagram-node node-catalog">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/><rect x="2" y="3" width="20" height="18" rx="2"/></svg>
-                    <span>Your Product Catalog</span>
+                <div class="flow-node flow-node--catalog">
+                    <div class="flow-node__icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/></svg>
+                    </div>
+                    <span class="flow-node__label">Product Catalog</span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<div class="divider"></div>
+
 <!-- Footer CTA -->
 <section class="footer-cta">
-    <h2>Ready to clinch agentic sales?</h2>
-    <a href="mailto:enquiries@clinchr.ai?subject=Early%20Usage%20Enquiry" class="cta-btn">Enquire About Early Usage</a>
+    <div class="footer-cta-bg"></div>
+    <div class="container">
+        <h2 class="reveal">Ready to clinch agentic sales?</h2>
+        <p class="footer-cta-sub reveal reveal-delay-1">Be among the first retailers to sell through AI agents.</p>
+        <a href="mailto:enquiries@clinchr.ai?subject=Early%20Usage%20Enquiry" class="btn-primary reveal reveal-delay-2">
+            Enquire About Early Usage
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg>
+        </a>
+    </div>
 </section>
 
 <footer>
     &copy; 2026 Clinchr. All rights reserved.
 </footer>
+
+<script>
+    // Nav scroll effect
+    const nav = document.querySelector('nav');
+    const onScroll = () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Scroll-triggered reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Animated counters
+    function animateCounter(el, target, prefix, suffix) {
+        const duration = 2000;
+        const start = performance.now();
+
+        function update(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.round(target * eased);
+            el.textContent = prefix + current + suffix;
+            if (progress < 1) requestAnimationFrame(update);
+        }
+
+        requestAnimationFrame(update);
+    }
+
+    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.dataset.target);
+                const prefix = el.dataset.prefix || '';
+                const suffix = el.dataset.suffix || '';
+                animateCounter(el, target, prefix, suffix);
+                counterObserver.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(el => counterObserver.observe(el));
+</script>
 
 </body>
 </html>
