@@ -160,6 +160,79 @@
             transform: translateX(2px);
         }
 
+        /* ---- GRID WRAPPER (continuous background for hero + demo + stats) ---- */
+        .grid-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid-wrapper-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 25% 30%, rgba(0, 212, 255, 0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 50% at 75% 25%, rgba(0, 230, 138, 0.05) 0%, transparent 70%),
+                radial-gradient(ellipse 90% 40% at 50% 70%, rgba(0, 212, 255, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .grid-wrapper-lines {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.025) 1px, transparent 1px);
+            background-size: 72px 72px;
+            mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent);
+            -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent);
+            pointer-events: none;
+        }
+
+        .grid-wrapper-glow-1, .grid-wrapper-glow-2 {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+        }
+
+        .grid-wrapper-glow-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--accent-cyan);
+            opacity: 0.06;
+            top: -5%;
+            right: -5%;
+            animation: drift 25s ease-in-out infinite;
+        }
+
+        .grid-wrapper-glow-2 {
+            width: 450px;
+            height: 450px;
+            background: var(--accent-green);
+            opacity: 0.04;
+            bottom: 20%;
+            left: -5%;
+            animation: drift 25s ease-in-out infinite reverse;
+        }
+
+        /* Fade the grid into the next section — positioned at the bottom of grid-wrapper */
+        .grid-wrapper-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 300px;
+            background: linear-gradient(to bottom, transparent 0%, var(--bg-primary) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(25px, -20px) scale(1.05); }
+            66% { transform: translate(-15px, 15px) scale(0.95); }
+        }
+
         /* ---- HERO ---- */
         .hero {
             min-height: 100vh;
@@ -168,64 +241,8 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 10rem 2rem 8rem;
+            padding: 10rem 2rem 4rem;
             position: relative;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 60% at 25% 40%, rgba(0, 212, 255, 0.07) 0%, transparent 70%),
-                radial-gradient(ellipse 60% 50% at 75% 30%, rgba(0, 230, 138, 0.05) 0%, transparent 70%),
-                radial-gradient(ellipse 90% 40% at 50% 90%, rgba(0, 212, 255, 0.04) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-grid {
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(0, 212, 255, 0.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 212, 255, 0.025) 1px, transparent 1px);
-            background-size: 72px 72px;
-            mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent);
-            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent);
-            pointer-events: none;
-        }
-
-        .hero-glow-1, .hero-glow-2 {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            pointer-events: none;
-        }
-
-        .hero-glow-1 {
-            width: 600px;
-            height: 600px;
-            background: var(--accent-cyan);
-            opacity: 0.06;
-            top: -15%;
-            right: -5%;
-            animation: drift 25s ease-in-out infinite;
-        }
-
-        .hero-glow-2 {
-            width: 450px;
-            height: 450px;
-            background: var(--accent-green);
-            opacity: 0.04;
-            bottom: 5%;
-            left: -5%;
-            animation: drift 25s ease-in-out infinite reverse;
-        }
-
-        @keyframes drift {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(25px, -20px) scale(1.05); }
-            66% { transform: translate(-15px, 15px) scale(0.95); }
         }
 
         .hero-content {
@@ -337,48 +354,6 @@
             transform: translateX(3px);
         }
 
-        .hero-scroll {
-            position: absolute;
-            bottom: 2.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-muted);
-            font-family: 'DM Mono', monospace;
-            font-size: 0.7rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .hero-scroll .scroll-line {
-            width: 1px;
-            height: 32px;
-            background: linear-gradient(to bottom, var(--text-muted), transparent);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-scroll .scroll-line::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 8px;
-            background: var(--accent-cyan);
-            box-shadow: 0 0 6px var(--accent-cyan);
-            border-radius: 2px;
-            animation: scrollPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes scrollPulse {
-            0% { top: -8px; opacity: 0; }
-            40% { opacity: 1; }
-            100% { top: 100%; opacity: 0; }
-        }
-
         /* ---- SECTIONS COMMON ---- */
         .container {
             max-width: 1100px;
@@ -411,95 +386,597 @@
             color: var(--accent-green);
         }
 
-        /* ---- PROBLEM SECTION ---- */
-        .problem {
-            padding: 10rem 0;
+        /* ---- CHAT DEMO SECTION ---- */
+        .demo-section {
+            padding: 2rem 0 4rem;
+            position: relative;
+            overflow: visible;
+            margin-top: -6rem;
+        }
+
+        .demo-section .container {
+            max-width: 960px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Underwater glow from demo */
+        .demo-glow {
+            position: absolute;
+            width: 800px;
+            height: 600px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(ellipse at center, rgba(0, 230, 138, 0.12) 0%, rgba(0, 230, 138, 0.06) 30%, rgba(0, 212, 255, 0.03) 50%, transparent 70%);
+            filter: blur(50px);
+            pointer-events: none;
+            z-index: 0;
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        /* Mac Window — Task 1: grey/black scheme + Task 3: parallax */
+        .mac-window {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #1e1e1e;
+            box-shadow:
+                0 4px 8px rgba(0, 0, 0, 0.3),
+                0 24px 64px rgba(0, 0, 0, 0.6),
+                0 0 80px rgba(0, 230, 138, 0.06);
+            will-change: transform;
+        }
+
+        .mac-titlebar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            background: #151515;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .mac-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .mac-dot--red { background: #ff5d55; }
+        .mac-dot--yellow { background: #ffba34; }
+        .mac-dot--green { background: #1fcb3d; }
+
+        .mac-titlebar-spacer {
+            flex: 1;
+        }
+
+        /* ---- DARK-MODE CHAT UI (Task 1: greys/blacks) ---- */
+        .chat-container {
+            display: flex;
+            height: 480px;
+            background: #212121;
             position: relative;
         }
 
-        .problem-inner {
-            max-width: 640px;
+        /* Sidebar — darkest */
+        .chat-sidebar {
+            width: 52px;
+            background: #161616;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 14px 0;
+            gap: 16px;
+            flex-shrink: 0;
         }
 
-        .problem h2 {
-            font-size: clamp(2rem, 4.5vw, 3.2rem);
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
+        .chat-sidebar-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            color: #777;
         }
 
-        .problem-text {
+        .chat-sidebar-icon:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .chat-sidebar-icon svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .chat-sidebar-icon.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #bbb;
+        }
+
+        .sidebar-divider {
+            width: 20px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Main chat area */
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        /* Top banner */
+        .chat-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            background: #1c1c1c;
+            flex-shrink: 0;
+        }
+
+        .chat-topbar-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+        }
+
+        .chat-topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-topbar-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.2s ease;
+        }
+
+        .chat-topbar-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #aaa;
+        }
+
+        .chat-topbar-btn svg {
+            width: 15px;
+            height: 15px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Chat body */
+        .chat-body {
+            flex: 1;
+            padding: 18px 24px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            background: #212121;
+        }
+
+        /* User message */
+        .chat-msg-user {
+            display: flex;
+            justify-content: flex-end;
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        .chat-msg-user.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .chat-bubble-user {
+            background: #383838;
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 16px 16px 4px 16px;
+            font-size: 0.85rem;
+            line-height: 1.55;
+            max-width: 70%;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .chat-bubble-user .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: var(--accent-cyan);
+            margin-left: 1px;
+            vertical-align: text-bottom;
+            animation: cursorBlink 0.8s step-end infinite;
+        }
+
+        @keyframes cursorBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* AI response area */
+        .chat-msg-ai {
+            display: flex;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        .chat-msg-ai.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .chat-ai-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .chat-ai-avatar svg {
+            width: 14px;
+            height: 14px;
+            fill: white;
+        }
+
+        .chat-ai-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* Thinking traces */
+        .thinking-traces {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .thinking-trace-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transform: translateX(-6px);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: #b0b0b0;
+            letter-spacing: 0.01em;
+        }
+
+        .thinking-trace-line.active {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .thinking-spinner {
+            width: 12px;
+            height: 12px;
+            border: 1.5px solid #555;
+            border-top-color: #8b5cf6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            flex-shrink: 0;
+        }
+
+        .thinking-spinner.done {
+            border-color: #22c55e;
+            border-top-color: #22c55e;
+            animation: none;
+            position: relative;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .thinking-trace-text {
+            overflow: hidden;
+        }
+
+        .thinking-trace-text .trace-typed {
+            display: inline;
+        }
+
+        /* AI text response */
+        .chat-ai-text {
+            font-size: 0.82rem;
+            line-height: 1.6;
+            color: #cccccc;
+            opacity: 0;
+            transform: translateY(4px);
+        }
+
+        .chat-ai-text.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .chat-ai-text p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Product card — compact, grey scheme */
+        .chat-product-card {
+            background: #2c2c2c;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 8px;
+            opacity: 0;
+            transform: translateY(12px);
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .chat-product-card.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .product-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #333 0%, #2a2a2a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .shoe-icon {
+            font-size: 2.6rem;
+        }
+
+        .product-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .product-top-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .product-brand {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.58rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2px;
+        }
+
+        .product-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+
+        .product-price {
+            font-family: 'Instrument Serif', serif;
             font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-weight: 300;
-            line-height: 1.75;
-            margin-bottom: 0.75rem;
+            color: var(--accent-green);
+            white-space: nowrap;
         }
 
-        .problem-text strong {
-            color: var(--text-primary);
-            font-weight: 500;
+        .product-reasons {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            margin-bottom: 8px;
+        }
+
+        .product-reasons li {
+            font-size: 0.72rem;
+            color: #bbb;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .product-reasons li::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            box-shadow: 0 0 4px var(--accent-green);
+            flex-shrink: 0;
+        }
+
+        .product-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .buy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, var(--accent-cyan), #00b4e6);
+            color: #000;
+            border: none;
+            border-radius: 200px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.72rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 16px rgba(0, 212, 255, 0.12);
+        }
+
+        .buy-btn:hover {
+            box-shadow: 0 0 32px rgba(0, 212, 255, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .buy-btn svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .powered-by-clinchr {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.58rem;
+            color: #666;
+        }
+
+        .powered-by-clinchr .clinchr-mini-icon {
+            width: 12px;
+            height: 12px;
+        }
+
+        .powered-by-clinchr .clinchr-logo-text {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 0.62rem;
+            color: var(--accent-green);
+            letter-spacing: -0.02em;
+        }
+
+        /* Chat input bar */
+        .chat-input-bar {
+            padding: 10px 16px 12px;
+            background: #1c1c1c;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            flex-shrink: 0;
+        }
+
+        .chat-input-field {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            background: #2a2a2a;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-input-text {
+            flex: 1;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .chat-input-send {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #555;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .chat-input-send svg {
+            width: 12px;
+            height: 12px;
+            stroke: #1e1e1e;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ---- STATS ROW ---- */
+        .stats-section {
+            padding: 6rem 0;
+            position: relative;
+            z-index: 2;
         }
 
         .stats-row {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 4rem;
-        }
-
-        .stat-card {
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
             position: relative;
-            padding: 2.5rem 2rem;
-            border-radius: 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: all 0.5s var(--ease-out-expo);
-            overflow: hidden;
         }
 
-        .stat-card::before {
+        .stat-item {
+            text-align: center;
+            padding: 2rem 2.5rem;
+            position: relative;
+        }
+
+        .stat-item:not(:last-child)::after {
             content: '';
             position: absolute;
-            inset: 0;
-            border-radius: 16px;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), transparent, rgba(0, 230, 138, 0.1));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-        }
-
-        .stat-card:hover {
-            border-color: var(--border-medium);
-            transform: translateY(-4px);
-            box-shadow:
-                0 4px 8px rgba(0, 0, 0, 0.15),
-                0 12px 24px rgba(0, 0, 0, 0.2),
-                0 32px 64px rgba(0, 0, 0, 0.25);
+            right: 0;
+            top: 15%;
+            height: 70%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--border-medium), transparent);
         }
 
         .stat-number {
             font-family: 'Instrument Serif', serif;
-            font-size: 3.5rem;
+            font-size: clamp(2.4rem, 4.5vw, 3.5rem);
             line-height: 1;
             margin-bottom: 0.75rem;
             letter-spacing: -0.03em;
-        }
-
-        .stat-card:nth-child(1) .stat-number {
-            background: linear-gradient(135deg, var(--accent-cyan), #66e0ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-card:nth-child(2) .stat-number {
-            background: linear-gradient(135deg, var(--accent-green), #66ffbb);
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -510,158 +987,406 @@
             color: var(--text-secondary);
             font-weight: 300;
             line-height: 1.55;
+            max-width: 240px;
+            margin: 0 auto;
         }
 
         .stat-source {
             display: inline-block;
-            margin-top: 0.75rem;
+            margin-top: 0.5rem;
             font-family: 'DM Mono', monospace;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: var(--text-muted);
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
         }
 
-        /* ---- COMPARISON CARDS ---- */
-        .compare-row {
+        /* ---- BEYOND GEO SECTION ---- */
+        .problem {
+            padding: 6rem 0 8rem;
+            position: relative;
+        }
+
+        .problem-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-top: 4.5rem;
-        }
-
-        .compare-card {
-            padding: 2.25rem 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-subtle);
-            position: relative;
-            transition: all 0.5s var(--ease-out-expo);
-            box-shadow:
-                0 2px 4px rgba(0, 0, 0, 0.08),
-                0 8px 16px rgba(0, 0, 0, 0.12),
-                0 24px 48px rgba(0, 0, 0, 0.16);
-        }
-
-        .compare-card__header {
-            display: flex;
+            gap: 4rem;
             align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
         }
 
-        .compare-card__tag {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.7rem;
-            font-weight: 500;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            padding: 0.25rem 0.6rem;
-            border-radius: 6px;
+        .problem-inner {
+            max-width: 520px;
         }
 
-        .compare-card__title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 400;
-            color: var(--text-muted);
-        }
-
-        .compare-card__desc {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1.25rem;
-            font-weight: 300;
-        }
-
-        .compare-card__list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.55rem;
-        }
-
-        .compare-card__list li {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.75rem;
-            letter-spacing: 0.02em;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .compare-card__list li::before {
-            content: '';
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        /* GEO card — muted / faded */
-        .compare-card--geo {
-            background: rgba(255, 255, 255, 0.02);
-            border-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .compare-card--geo .compare-card__tag {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-muted);
-        }
-
-        .compare-card--geo .compare-card__desc {
-            color: var(--text-muted);
-        }
-
-        .compare-card--geo .compare-card__list li {
-            color: var(--text-muted);
-        }
-
-        .compare-card--geo .compare-card__list li::before {
-            background: var(--text-muted);
-            opacity: 0.4;
-        }
-
-        /* Clinchr card — highlighted / glowing */
-        .compare-card--clinchr {
-            background: rgba(0, 230, 138, 0.03);
-            border-color: rgba(0, 230, 138, 0.15);
-            box-shadow:
-                0 2px 4px rgba(0, 0, 0, 0.08),
-                0 8px 16px rgba(0, 0, 0, 0.12),
-                0 24px 48px rgba(0, 0, 0, 0.16),
-                0 0 40px rgba(0, 230, 138, 0.04);
-        }
-
-        .compare-card--clinchr::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 16px;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(0, 230, 138, 0.2), transparent 60%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-        }
-
-        .compare-card--clinchr .compare-card__tag {
-            background: var(--accent-green-dim);
-            color: var(--accent-green);
-            border: 1px solid rgba(0, 230, 138, 0.2);
-        }
-
-        .compare-card--clinchr .compare-card__desc {
-            color: var(--text-secondary);
-        }
-
-        .compare-card--clinchr .compare-card__list li {
+        .problem h2 {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
             color: var(--text-primary);
         }
 
-        .compare-card--clinchr .compare-card__list li::before {
+        .problem-text {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.75;
+            margin-bottom: 1rem;
+        }
+
+        .problem-text strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .problem-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--accent-green);
+            letter-spacing: 0.01em;
+        }
+
+        .problem-cta::before {
+            content: '';
+            width: 6px;
+            height: 6px;
             background: var(--accent-green);
-            box-shadow: 0 0 6px var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-green);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* ---- PHONE & LAPTOP 3D DEMO (Task 4) ---- */
+        .devices-demo {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            perspective: 1400px;
+        }
+
+        /* --- LAPTOP DEVICE (JSON trawling) --- */
+        .device-laptop {
+            position: absolute;
+            left: -20px;
+            top: 10px;
+            transform: rotateY(20deg) rotateX(8deg);
+            transform-style: preserve-3d;
+            z-index: 1;
+        }
+
+        .laptop-screen {
+            width: 400px;
+            height: 280px;
+            background: #0d0d14;
+            border-radius: 10px 10px 0 0;
+            border: 3px solid #2a2a2a;
+            border-bottom: none;
+            overflow: hidden;
+            position: relative;
+            box-shadow:
+                0 -2px 20px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+        }
+
+        .laptop-bezel-top {
+            height: 24px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .laptop-camera {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #333;
+            border: 1px solid #444;
+        }
+
+        .laptop-screen-content {
+            height: calc(100% - 24px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .laptop-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .laptop-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+        }
+
+        .laptop-dot:nth-child(1) { background: #ff5d55; }
+        .laptop-dot:nth-child(2) { background: #ffba34; }
+        .laptop-dot:nth-child(3) { background: #1fcb3d; }
+
+        .laptop-title {
+            flex: 1;
+            text-align: center;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+        }
+
+        .laptop-base {
+            width: 440px;
+            height: 14px;
+            background: linear-gradient(to bottom, #2a2a2a, #222);
+            border-radius: 0 0 4px 4px;
+            margin-left: -20px;
+            position: relative;
+            transform: translateZ(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .laptop-base::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            border-radius: 2px;
+            background: #333;
+        }
+
+        .laptop-base-bottom {
+            width: 460px;
+            height: 6px;
+            background: linear-gradient(to bottom, #222, #1a1a1a);
+            border-radius: 0 0 8px 8px;
+            margin-left: -30px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- PHONE DEVICE (Chat request) --- */
+        .device-phone {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            transform: rotateY(-10deg) rotateX(6deg);
+            transform-style: preserve-3d;
+            z-index: 2;
+        }
+
+        .phone-body {
+            width: 200px;
+            height: 400px;
+            background: #1a1a1a;
+            border-radius: 24px;
+            border: 3px solid #333;
+            overflow: hidden;
+            position: relative;
+            box-shadow:
+                8px 8px 32px rgba(0, 0, 0, 0.5),
+                0 32px 80px rgba(0, 0, 0, 0.4),
+                4px 0 30px rgba(0, 230, 138, 0.04),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+        }
+
+        /* Phone side edge (3D effect) */
+        .phone-body::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            right: -5px;
+            width: 5px;
+            height: 80%;
+            background: linear-gradient(to right, #2a2a2a, #1a1a1a);
+            border-radius: 0 2px 2px 0;
+            z-index: -1;
+            transform: translateZ(-1px);
+        }
+
+        .phone-notch {
+            width: 80px;
+            height: 22px;
+            background: #1a1a1a;
+            border-radius: 0 0 16px 16px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .phone-notch-camera {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #222;
+            border: 1px solid #333;
+        }
+
+        .phone-screen-content {
+            padding: 8px 10px;
+            height: calc(100% - 42px);
+            overflow: hidden;
+        }
+
+        .phone-status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 4px 8px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.45rem;
+            color: #666;
+        }
+
+        .phone-app-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 8px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .phone-app-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .phone-app-icon svg {
+            width: 10px;
+            height: 10px;
+            fill: white;
+        }
+
+        .phone-app-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #ddd;
+        }
+
+        .phone-prompt {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.62rem;
+            color: #ccc;
+            padding: 8px 10px;
+            background: #333;
+            border-radius: 12px 12px 4px 12px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            line-height: 1.5;
+        }
+
+        .phone-thinking {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.5rem;
+            color: #888;
+            padding: 6px 0;
+        }
+
+        .phone-thinking .thinking-spinner {
+            width: 8px;
+            height: 8px;
+        }
+
+        .phone-product-ghost {
+            margin-top: 10px;
+            padding: 8px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+        }
+
+        .phone-ghost-line {
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.06);
+            margin-bottom: 6px;
+        }
+
+        .phone-ghost-line:nth-child(1) { width: 60%; }
+        .phone-ghost-line:nth-child(2) { width: 80%; }
+        .phone-ghost-line:nth-child(3) { width: 45%; }
+
+        .phone-home-bar {
+            width: 60px;
+            height: 4px;
+            background: #444;
+            border-radius: 2px;
+            margin: 0 auto;
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Laptop JSON stream */
+        .json-scroll-viewport {
+            height: calc(100% - 26px);
+            overflow: hidden;
+            position: relative;
+            padding: 8px;
+        }
+
+        .json-scroll-content {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.5rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            white-space: pre;
+            animation: jsonStreamScroll 50s linear infinite;
+        }
+
+        @keyframes jsonStreamScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        .json-scroll-fade-top,
+        .json-scroll-fade-bottom {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 40px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .json-scroll-fade-top {
+            top: 26px;
+            background: linear-gradient(to bottom, #0d0d14, transparent);
+        }
+
+        .json-scroll-fade-bottom {
+            bottom: 0;
+            background: linear-gradient(to top, #0d0d14, transparent);
         }
 
         /* ---- SOLUTION SECTION ---- */
@@ -713,11 +1438,6 @@
             border-radius: 50%;
             box-shadow: 0 0 8px var(--accent-green);
             animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.3); }
         }
 
         /* ---- AGENT FLOW DIAGRAM ---- */
@@ -873,7 +1593,17 @@
             left: -1px;
             height: 10px;
             border-radius: 2px;
-            animation: flowDown 2.2s ease-in-out infinite;
+            animation: flowDown 2.4s ease-in-out infinite;
+        }
+
+        .flow-line .flow-light-up {
+            position: absolute;
+            width: 3px;
+            left: -1px;
+            height: 10px;
+            border-radius: 2px;
+            animation: flowUp 2.4s ease-in-out infinite;
+            animation-delay: 1.2s;
         }
 
         .flow-line--cyan::after {
@@ -881,9 +1611,19 @@
             box-shadow: 0 0 8px var(--accent-cyan);
         }
 
+        .flow-line--cyan .flow-light-up {
+            background: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+        }
+
         .flow-line--green::after {
             background: var(--accent-green);
             box-shadow: 0 0 8px var(--accent-green);
+        }
+
+        .flow-line--green .flow-light-up {
+            background: var(--accent-cyan);
+            box-shadow: 0 0 8px var(--accent-cyan);
         }
 
         @keyframes flowDown {
@@ -893,13 +1633,19 @@
             100% { top: 100%; opacity: 0; }
         }
 
+        @keyframes flowUp {
+            0% { bottom: -10px; top: auto; opacity: 0; }
+            30% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { bottom: 100%; top: auto; opacity: 0; }
+        }
+
         .flow-arrow {
             color: var(--text-muted);
             font-size: 0.5rem;
             line-height: 1;
         }
 
-        /* Negotiation zone */
         .flow-negotiation {
             display: flex;
             flex-direction: column;
@@ -954,7 +1700,6 @@
             gap: 0.3rem;
         }
 
-        /* Fetch connector */
         .flow-fetch {
             display: flex;
             align-items: center;
@@ -1051,15 +1796,38 @@
             .flow {
                 order: -1;
             }
+
+            .problem-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .devices-demo {
+                height: 380px;
+            }
+
+            .device-phone .phone-body {
+                width: 170px;
+                height: 340px;
+            }
+
+            .laptop-screen {
+                width: 320px;
+                height: 220px;
+            }
+
+            .laptop-base {
+                width: 350px;
+            }
+
+            .laptop-base-bottom {
+                width: 370px;
+            }
         }
 
         @media (max-width: 768px) {
             nav {
                 padding: 1rem 1.25rem;
-            }
-
-            .nav-logo-img {
-                height: 30px;
             }
 
             .logo-text {
@@ -1071,16 +1839,8 @@
                 min-height: auto;
             }
 
-            .hero-logo-img {
-                height: 56px;
-            }
-
             .hero h1 {
                 font-size: clamp(2rem, 8vw, 2.8rem);
-            }
-
-            .hero-scroll {
-                display: none;
             }
 
             .problem, .solution, .footer-cta {
@@ -1089,10 +1849,16 @@
 
             .stats-row {
                 grid-template-columns: 1fr;
+                gap: 0;
             }
 
-            .compare-row {
-                grid-template-columns: 1fr;
+            .stat-item:not(:last-child)::after {
+                width: 60%;
+                height: 1px;
+                right: auto;
+                left: 20%;
+                top: auto;
+                bottom: 0;
             }
 
             .stat-number {
@@ -1112,11 +1878,101 @@
             .footer-cta {
                 padding: 6rem 0 5rem;
             }
+
+            .demo-section {
+                padding: 4rem 0 2rem;
+            }
+
+            .chat-container {
+                height: 480px;
+            }
+
+            .chat-sidebar {
+                width: 44px;
+            }
+
+            .chat-body {
+                padding: 16px 20px;
+            }
+
+            .chat-bubble-user {
+                max-width: 85%;
+            }
+
+            .chat-product-card {
+                flex-direction: column;
+            }
+
+            .product-image {
+                width: 100%;
+                height: 80px;
+            }
+
+            .problem-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .devices-demo {
+                height: 340px;
+            }
+
+            .device-phone {
+                right: -10px;
+            }
+
+            .device-phone .phone-body {
+                width: 150px;
+                height: 300px;
+            }
+
+            .laptop-screen {
+                width: 260px;
+                height: 180px;
+            }
+
+            .laptop-base {
+                width: 290px;
+                margin-left: -15px;
+            }
+
+            .laptop-base-bottom {
+                width: 310px;
+                margin-left: -25px;
+            }
+
+            .device-laptop {
+                left: -15px;
+            }
         }
 
         @media (max-width: 480px) {
             .hero-cta-group {
                 flex-direction: column;
+            }
+
+            .chat-container {
+                height: 440px;
+            }
+
+            .device-phone .phone-body {
+                width: 130px;
+                height: 260px;
+            }
+
+            .laptop-screen {
+                width: 210px;
+                height: 150px;
+            }
+
+            .laptop-base {
+                width: 240px;
+                margin-left: -15px;
+            }
+
+            .laptop-base-bottom {
+                width: 260px;
+                margin-left: -25px;
             }
         }
 
@@ -1147,13 +2003,9 @@
         <a href="#" class="logo">
             <span class="logo-icon logo-icon--nav">
                 <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Bag body (wide trapezoid shape) -->
                     <path d="M8 17h32l-3 23a3 3 0 0 1-3 3H14a3 3 0 0 1-3-3L8 17z" fill="white"/>
-                    <!-- Flat top rim -->
                     <rect x="7" y="15" width="34" height="4" rx="1.5" fill="white"/>
-                    <!-- Handle (thin arch) -->
                     <path d="M18 15V11a6 6 0 0 1 12 0v4" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
-                    <!-- Happy closed eyes -->
                     <path d="M16 28c1-2 3-2 4 0" stroke="var(--bg-primary)" stroke-width="1.6" stroke-linecap="round" fill="none"/>
                     <path d="M28 28c1-2 3-2 4 0" stroke="var(--bg-primary)" stroke-width="1.6" stroke-linecap="round" fill="none"/>
                 </svg>
@@ -1167,66 +2019,245 @@
     </div>
 </nav>
 
-<!-- Hero -->
-<section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-glow-1"></div>
-    <div class="hero-glow-2"></div>
+<!-- Grid wrapper: continuous background across hero + demo + stats (Task 2) -->
+<div class="grid-wrapper">
+    <div class="grid-wrapper-bg"></div>
+    <div class="grid-wrapper-lines"></div>
+    <div class="grid-wrapper-glow-1"></div>
+    <div class="grid-wrapper-glow-2"></div>
+    <div class="grid-wrapper-fade"></div>
 
-    <div class="hero-content">
-        <h1>Win sales in the age of agentic commerce</h1>
-        <p class="hero-sub">The intelligent agent layer between purchasing AI and your products&mdash;so&nbsp;you clinch every sale.</p>
-        <div class="hero-cta-group">
-            <a href="mailto:enquiries@clinchr.ai?subject=Early%20Usage%20Enquiry" class="btn-primary">
-                Request Early Access
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg>
-            </a>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Win sales in the age of agentic commerce</h1>
+            <p class="hero-sub">The intelligent agent layer between purchasing AI and your products&mdash;so&nbsp;you clinch every sale.</p>
+            <div class="hero-cta-group">
+                <a href="mailto:enquiries@clinchr.ai?subject=Early%20Usage%20Enquiry" class="btn-primary">
+                    Request Early Access
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg>
+                </a>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div class="hero-scroll">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
-    </div>
-</section>
+    <!-- Chat Demo (Task 3: parallax slide-up) -->
+    <section class="demo-section" id="demoSection">
+        <div class="demo-glow"></div>
+
+        <div class="container">
+            <div class="mac-window reveal" id="chatDemo">
+                <div class="mac-titlebar">
+                    <div class="mac-dot mac-dot--red"></div>
+                    <div class="mac-dot mac-dot--yellow"></div>
+                    <div class="mac-dot mac-dot--green"></div>
+                    <div class="mac-titlebar-spacer"></div>
+                </div>
+                <div class="chat-container">
+                    <!-- Sidebar -->
+                    <div class="chat-sidebar">
+                        <div class="chat-sidebar-icon active">
+                            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                        </div>
+                        <div class="chat-sidebar-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+                        </div>
+                        <div class="sidebar-divider"></div>
+                        <div class="chat-sidebar-icon">
+                            <svg viewBox="0 0 24 24"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+                        </div>
+                        <div class="chat-sidebar-icon">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Main chat -->
+                    <div class="chat-main">
+                        <div class="chat-topbar">
+                            <div class="chat-topbar-title">Shopping Assistant</div>
+                            <div class="chat-topbar-actions">
+                                <button class="chat-topbar-btn">
+                                    <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="chat-body" id="chatBody">
+                            <div class="chat-msg-user" id="chatUser">
+                                <div class="chat-bubble-user" id="chatBubble"></div>
+                            </div>
+
+                            <div class="chat-msg-ai" id="chatThinking">
+                                <div class="chat-ai-avatar">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 3c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3zm0 14c-2.5 0-4.7-1.3-6-3.2.03-2 4-3.1 6-3.1s5.97 1.1 6 3.1c-1.3 1.9-3.5 3.2-6 3.2z"/></svg>
+                                </div>
+                                <div class="chat-ai-content">
+                                    <div class="thinking-traces" id="thinkingTraces">
+                                        <div class="thinking-trace-line" id="trace1">
+                                            <div class="thinking-spinner" id="spinner1"></div>
+                                            <div class="thinking-trace-text"><span class="trace-typed" id="traceText1"></span></div>
+                                        </div>
+                                        <div class="thinking-trace-line" id="trace2">
+                                            <div class="thinking-spinner" id="spinner2"></div>
+                                            <div class="thinking-trace-text"><span class="trace-typed" id="traceText2"></span></div>
+                                        </div>
+                                        <div class="thinking-trace-line" id="trace3">
+                                            <div class="thinking-spinner" id="spinner3"></div>
+                                            <div class="thinking-trace-text"><span class="trace-typed" id="traceText3"></span></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="chat-ai-text" id="chatAiText">
+                                        <p>Based on high-resolution product data from a verified retail agent, here is my top recommendation for the London Marathon:</p>
+                                    </div>
+
+                                    <div class="chat-product-card" id="chatProduct">
+                                        <div class="product-image">
+                                            <span class="shoe-icon">&#128095;</span>
+                                        </div>
+                                        <div class="product-body">
+                                            <div class="product-top-row">
+                                                <div>
+                                                    <div class="product-brand">Nike</div>
+                                                    <div class="product-name">Vaporfly 3 &mdash; London Edition</div>
+                                                </div>
+                                                <div class="product-price">&pound;224.99</div>
+                                            </div>
+                                            <ul class="product-reasons">
+                                                <li>87% energy return &mdash; highest of any marathon shoe tested</li>
+                                                <li>186g carbon-plate design rated for sub-3hr marathons</li>
+                                                <li>Flyknit upper optimised for London&rsquo;s April race conditions</li>
+                                            </ul>
+                                            <div class="product-actions">
+                                                <button class="buy-btn">
+                                                    Buy Now
+                                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg>
+                                                </button>
+                                                <div class="powered-by-clinchr">
+                                                    <svg class="clinchr-mini-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8 17h32l-3 23a3 3 0 0 1-3 3H14a3 3 0 0 1-3-3L8 17z" fill="#00e68a"/>
+                                                        <rect x="7" y="15" width="34" height="4" rx="1.5" fill="#00e68a"/>
+                                                        <path d="M18 15V11a6 6 0 0 1 12 0v4" stroke="#00e68a" stroke-width="2" stroke-linecap="round" fill="none"/>
+                                                    </svg>
+                                                    powered by <span class="clinchr-logo-text">clinchr</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chat-input-bar">
+                            <div class="chat-input-field">
+                                <span class="chat-input-text">Ask a follow-up&hellip;</span>
+                                <div class="chat-input-send">
+                                    <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-row">
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-target="53" data-suffix="%">0%</div>
+                    <div class="stat-label">of shoppers have used AI chatbots for product comparison</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-1">
+                    <div class="stat-number">1/4</div>
+                    <div class="stat-label">of all online sales projected to be completed through AI agents</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-2">
+                    <div class="stat-number" data-target="5" data-prefix="$" data-suffix="tn">$0tn</div>
+                    <div class="stat-label">projected agentic commerce market size by 2030</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div><!-- end grid-wrapper -->
 
 <div class="divider"></div>
 
-<!-- Problem -->
+<!-- Beyond GEO -->
 <section class="problem">
     <div class="container">
-        <div class="problem-inner reveal">
-            <span class="section-label">Beyond GEO</span>
-            <h2>The market is moving beyond static optimisation</h2>
-            <p class="problem-text">49% of US shoppers already use ChatGPT to research products. Generative Engine Optimisation helps you appear in those results&mdash;but <strong>appearing isn&rsquo;t enough.</strong></p>
-            <p class="problem-text">As AI agents take over purchasing decisions, you need more than visibility. You need <strong>your product to be chosen.</strong></p>
-        </div>
-
-        <div class="compare-row">
-            <div class="compare-card compare-card--geo reveal reveal-delay-1">
-                <div class="compare-card__header">
-                    <span class="compare-card__tag">GEO</span>
-                    <span class="compare-card__title">Generative Engine Optimisation</span>
-                </div>
-                <p class="compare-card__desc">Optimises your content to appear in AI-generated answers and recommendations</p>
-                <ul class="compare-card__list">
-                    <li>Passive optimisation</li>
-                    <li>Visibility-focused</li>
-                    <li>Static content</li>
-                </ul>
+        <div class="problem-grid">
+            <div class="problem-inner reveal">
+                <span class="section-label">Beyond GEO</span>
+                <h2>The market is moving beyond static optimisation</h2>
+                <p class="problem-text">Generative Engine Optimisation companies assume the static optimisation of data and keywords which worked for SEO will work in the agentic era.</p>
+                <p class="problem-text">But purchasing agents hate trawling through lengthy product catalogs, stuffed with <strong>vague and irrelevant data.</strong></p>
+                <p class="problem-cta">Optimise for the agentic shopper with your own sales agent.</p>
             </div>
-            <div class="compare-card compare-card--clinchr reveal reveal-delay-2">
-                <div class="compare-card__header">
-                    <span class="compare-card__tag">Clinchr</span>
-                    <span class="compare-card__title">Agentic Sales Layer</span>
+
+            <!-- Task 4: Phone + Laptop 3D devices demo -->
+            <div class="devices-demo reveal reveal-delay-2" id="devicesDemo">
+                <!-- Laptop (JSON trawling) -->
+                <div class="device-laptop">
+                    <div class="laptop-screen">
+                        <div class="laptop-bezel-top">
+                            <div class="laptop-camera"></div>
+                        </div>
+                        <div class="laptop-screen-content">
+                            <div class="laptop-toolbar">
+                                <div class="laptop-dot"></div>
+                                <div class="laptop-dot"></div>
+                                <div class="laptop-dot"></div>
+                                <span class="laptop-title">product_catalog</span>
+                            </div>
+                            <div class="json-scroll-viewport">
+                                <div class="json-scroll-content" id="backJsonStream"></div>
+                                <div class="json-scroll-fade-top"></div>
+                                <div class="json-scroll-fade-bottom"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="laptop-base">
+                        <div></div>
+                    </div>
+                    <div class="laptop-base-bottom"></div>
                 </div>
-                <p class="compare-card__desc">An intelligent agent that negotiates with purchasing AI to win the sale in real time</p>
-                <ul class="compare-card__list">
-                    <li>Active negotiation</li>
-                    <li>Conversion-focused</li>
-                    <li>Dynamic &amp; real-time</li>
-                </ul>
+
+                <!-- Phone (Chat request) -->
+                <div class="device-phone">
+                    <div class="phone-body">
+                        <div class="phone-notch">
+                            <div class="phone-notch-camera"></div>
+                        </div>
+                        <div class="phone-screen-content">
+                            <div class="phone-status-bar">
+                                <span>9:41</span>
+                                <span>5G</span>
+                            </div>
+                            <div class="phone-app-header">
+                                <div class="phone-app-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 3c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3z"/></svg>
+                                </div>
+                                <span class="phone-app-name">Shopping Assistant</span>
+                            </div>
+                            <div class="phone-prompt">
+                                Find me the best trainers to do the London Marathon in.
+                            </div>
+                            <div class="phone-thinking">
+                                <div class="thinking-spinner"></div>
+                                <span>Trawling product catalogs&hellip;</span>
+                            </div>
+                            <div class="phone-product-ghost">
+                                <div class="phone-ghost-line"></div>
+                                <div class="phone-ghost-line"></div>
+                                <div class="phone-ghost-line"></div>
+                            </div>
+                        </div>
+                        <div class="phone-home-bar"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1260,7 +2291,9 @@
                 </div>
 
                 <div class="flow-connector">
-                    <div class="flow-line flow-line--cyan"></div>
+                    <div class="flow-line flow-line--cyan">
+                        <span class="flow-light-up"></span>
+                    </div>
                     <span class="flow-arrow">&#9662;</span>
                 </div>
 
@@ -1292,7 +2325,9 @@
 
                 <div class="flow-fetch">
                     <div class="flow-connector">
-                        <div class="flow-line flow-line--green"></div>
+                        <div class="flow-line flow-line--green">
+                            <span class="flow-light-up"></span>
+                        </div>
                         <span class="flow-arrow">&#9662;</span>
                     </div>
                     <span class="flow-fetch__label">fetches</span>
@@ -1312,7 +2347,6 @@
 
 <div class="divider"></div>
 
-<!-- Footer CTA -->
 <section class="footer-cta">
     <div class="footer-cta-bg"></div>
     <div class="container">
@@ -1330,7 +2364,7 @@
 </footer>
 
 <script>
-    // Nav scroll effect
+    // ---- Nav scroll effect ----
     const nav = document.querySelector('nav');
     const onScroll = () => {
         nav.classList.toggle('scrolled', window.scrollY > 40);
@@ -1338,7 +2372,7 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    // Scroll-triggered reveal
+    // ---- Scroll-triggered reveal ----
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1351,7 +2385,7 @@
 
     reveals.forEach(el => observer.observe(el));
 
-    // Animated counters
+    // ---- Animated counters ----
     function animateCounter(el, target, prefix, suffix) {
         const duration = 2000;
         const start = performance.now();
@@ -1382,6 +2416,222 @@
     }, { threshold: 0.5 });
 
     statNumbers.forEach(el => counterObserver.observe(el));
+
+    // ---- Task 3: Parallax scroll-up for chat demo (lemrock-style) ----
+    const macWindow = document.getElementById('chatDemo');
+    const demoSection = document.getElementById('demoSection');
+
+    function updateParallax() {
+        if (!macWindow || !demoSection) return;
+        const rect = demoSection.getBoundingClientRect();
+        const viewH = window.innerHeight;
+
+        // Calculate how far the section has scrolled into view
+        // Start: rect.top == viewH (just entering bottom)
+        // End: rect.top == -rect.height (fully scrolled past)
+        const totalTravel = viewH + rect.height;
+        const progress = Math.max(0, Math.min(1, (viewH - rect.top) / totalTravel));
+
+        // Move from +200px to -60px as user scrolls through
+        const translateY = 200 - (progress * 260);
+        macWindow.style.transform = `translateY(${translateY}px)`;
+    }
+
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    updateParallax();
+
+    // ---- Typewriter utility ----
+    function typeText(element, text, speed, callback) {
+        let i = 0;
+        element.textContent = '';
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else if (callback) {
+                callback();
+            }
+        }
+        type();
+    }
+
+    // ---- Chat Demo Animation ----
+    const chatDemo = document.getElementById('chatDemo');
+    let chatAnimationTimer = null;
+
+    const PROMPT_TEXT = 'Find me the best trainers to do the London Marathon in.';
+    const TRACE_TEXTS = [
+        'Trawling catalogs for suitable running shoes',
+        'Communicating with clinchr agent for data-based recommendation',
+        'Clinchr agent recommendation supported by high resolution data, catalog trawl yields vague and irrelevant data'
+    ];
+
+    function resetChatAnimation() {
+        const chatUser = document.getElementById('chatUser');
+        const chatBubble = document.getElementById('chatBubble');
+        const chatThinking = document.getElementById('chatThinking');
+        const chatAiText = document.getElementById('chatAiText');
+        const chatProduct = document.getElementById('chatProduct');
+        const chatBody = document.getElementById('chatBody');
+
+        chatUser.classList.remove('active');
+        chatThinking.classList.remove('active');
+        chatAiText.classList.remove('active');
+        chatProduct.classList.remove('active');
+        chatBubble.textContent = '';
+
+        for (let i = 1; i <= 3; i++) {
+            const trace = document.getElementById('trace' + i);
+            const spinner = document.getElementById('spinner' + i);
+            const text = document.getElementById('traceText' + i);
+            trace.classList.remove('active');
+            spinner.classList.remove('done');
+            text.textContent = '';
+        }
+
+        chatBody.scrollTop = 0;
+    }
+
+    function runChatAnimation() {
+        resetChatAnimation();
+
+        const chatUser = document.getElementById('chatUser');
+        const chatBubble = document.getElementById('chatBubble');
+        const chatThinking = document.getElementById('chatThinking');
+        const chatAiText = document.getElementById('chatAiText');
+        const chatProduct = document.getElementById('chatProduct');
+        const chatBody = document.getElementById('chatBody');
+
+        setTimeout(() => {
+            chatUser.classList.add('active');
+            typeText(chatBubble, PROMPT_TEXT, 35);
+        }, 400);
+
+        const promptDuration = PROMPT_TEXT.length * 35 + 600;
+        setTimeout(() => {
+            chatThinking.classList.add('active');
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }, promptDuration);
+
+        let traceDelay = promptDuration + 600;
+
+        TRACE_TEXTS.forEach((text, idx) => {
+            const traceId = idx + 1;
+            setTimeout(() => {
+                const trace = document.getElementById('trace' + traceId);
+                const traceText = document.getElementById('traceText' + traceId);
+                trace.classList.add('active');
+                typeText(traceText, text, 25, () => {
+                    document.getElementById('spinner' + traceId).classList.add('done');
+                });
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, traceDelay);
+            traceDelay += text.length * 25 + 800;
+        });
+
+        setTimeout(() => {
+            chatAiText.classList.add('active');
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }, traceDelay + 400);
+
+        setTimeout(() => {
+            chatProduct.classList.add('active');
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }, traceDelay + 1200);
+
+        chatAnimationTimer = setTimeout(() => {
+            runChatAnimation();
+        }, traceDelay + 1200 + 30000);
+    }
+
+    const chatObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                runChatAnimation();
+                chatObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.25 });
+
+    if (chatDemo) chatObserver.observe(chatDemo);
+
+    // ---- Devices Demo - JSON Stream ----
+    const irrelevantProducts = [
+        {
+            "product_name": "CozyFit Indoor Slippers",
+            "product_id": "SLP-20481",
+            "product_description": "Soft memory foam slippers for indoor comfort. Plush fleece lining.",
+            "category": "Footwear / Indoor",
+            "price": "\u00a324.99",
+            "sizes_available": ["S", "M", "L", "XL"],
+            "material": "Polyester fleece, memory foam sole",
+            "customer_rating": "4.2 / 5"
+        },
+        {
+            "product_name": "UrbanStep Leather Brogues",
+            "product_id": "BRG-33107",
+            "product_description": "Classic leather brogues for formal occasions. Hand-stitched detailing.",
+            "category": "Footwear / Formal",
+            "price": "\u00a3119.00",
+            "sizes_available": ["UK 7", "UK 8", "UK 9", "UK 10", "UK 11"],
+            "material": "Full-grain leather upper, rubber sole",
+            "customer_rating": "4.5 / 5"
+        },
+        {
+            "product_name": "BeachWave Flip Flops",
+            "product_id": "FLP-77320",
+            "product_description": "Lightweight flip flops for summer. Quick-dry EVA construction.",
+            "category": "Footwear / Casual",
+            "price": "\u00a312.99",
+            "sizes_available": ["UK 6", "UK 7", "UK 8", "UK 9"],
+            "material": "EVA foam, nylon toe strap",
+            "customer_rating": "3.8 / 5"
+        },
+        {
+            "product_name": "TrailBlazer Hiking Boot",
+            "product_id": "HKB-90155",
+            "product_description": "Waterproof hiking boots for rough terrain. Ankle support with Vibram outsole.",
+            "category": "Footwear / Outdoor",
+            "price": "\u00a3149.99",
+            "sizes_available": ["UK 7", "UK 8", "UK 9", "UK 10"],
+            "material": "Nubuck leather, Gore-Tex lining",
+            "customer_rating": "4.6 / 5"
+        },
+        {
+            "product_name": "DeskComfort Ergonomic Sandals",
+            "product_id": "SND-41289",
+            "product_description": "Contoured footbed sandals designed for all-day wear at standing desks.",
+            "category": "Footwear / Comfort",
+            "price": "\u00a359.99",
+            "sizes_available": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
+            "material": "Cork footbed, synthetic leather strap",
+            "customer_rating": "4.1 / 5"
+        },
+        {
+            "product_name": "SnowPeak Winter Boot",
+            "product_id": "WBT-66402",
+            "product_description": "Insulated winter boots rated to -25\u00b0C. Thermal fleece lining.",
+            "category": "Footwear / Winter",
+            "price": "\u00a389.99",
+            "sizes_available": ["UK 7", "UK 8", "UK 9", "UK 10", "UK 11"],
+            "material": "Synthetic upper, Thinsulate insulation",
+            "customer_rating": "4.3 / 5"
+        }
+    ];
+
+    function prettyJSON(obj) {
+        return JSON.stringify(obj, null, 2);
+    }
+
+    const backJsonStream = document.getElementById('backJsonStream');
+    if (backJsonStream) {
+        let allJSON = '';
+        irrelevantProducts.forEach(p => {
+            allJSON += prettyJSON(p) + '\n\n';
+        });
+```        backJsonStream.textContent = allJSON + allJSON;
+    }
 </script>
 
 </body>
