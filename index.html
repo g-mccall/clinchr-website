@@ -2250,7 +2250,7 @@
                     <div class="stat-label">of shoppers have used AI chatbots for product comparison</div>
                 </div>
                 <div class="stat-item reveal reveal-delay-1">
-                    <div class="stat-number" data-target="1/4">0/100</div>
+                    <div class="stat-number"> 1/4</div>
                     <div class="stat-label">of all online sales projected to be completed through AI agents</div>
                 </div>
                 <div class="stat-item reveal reveal-delay-2">
@@ -2626,8 +2626,8 @@
         }, traceDelay + 1200);
 
         chatAnimationTimer = setTimeout(() => {
-            runChatAnimation();
-        }, traceDelay + 1200 + 30000);
+            runChatAnimation(); if (chatAnimationTimer) clearTimeout(chatAnimationTimer);
+        }, traceDelay + 1200 + 30000); 
     }
 
     const chatObserver = new IntersectionObserver((entries) => {
