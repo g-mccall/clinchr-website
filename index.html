@@ -2681,6 +2681,8 @@
         const submitBtn = document.getElementById('enquirySubmit');
         const status = document.getElementById('enquiryStatus');
         let lastFocused = null;
+        let submitCancelled = false;
+        const originalLabel = submitBtn.innerHTML;
 
         function openModal(e) {
             if (e) e.preventDefault();
@@ -2692,6 +2694,7 @@
         }
 
         function closeModal() {
+            submitCancelled = true;
             modal.classList.remove('open');
             document.body.style.overflow = '';
             setTimeout(() => {
@@ -2703,6 +2706,8 @@
                 formWrap.hidden = false;
                 successWrap.hidden = true;
                 submitBtn.disabled = false;
+                submitBtn.innerHTML = originalLabel;
+                submitCancelled = false;
                 if (lastFocused && lastFocused.focus) lastFocused.focus();
             }, 300);
         }
