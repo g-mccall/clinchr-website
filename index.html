@@ -2963,11 +2963,11 @@
             if (entry.isIntersecting) {
                 runChatAnimation();
                 chatObserver.unobserve(entry.target);
-                let chatHiddenAt = 0;
+                let chatHiddenAt = null;
                 document.addEventListener('visibilitychange', () => {
                     if (document.visibilityState === 'hidden') {
                         chatHiddenAt = Date.now();
-                    } else if (Date.now() - chatHiddenAt > 30000) {
+                    } else if (chatHiddenAt !== null && Date.now() - chatHiddenAt > 30000) {
                         runChatAnimation();
                     }
                 });
