@@ -2525,6 +2525,19 @@
     window.addEventListener('scroll', updateParallax, { passive: true });
     updateParallax();
 
+    // Tracked timers so resetChatAnimation can cancel everything in flight, including the recursive typewriter — backgrounded-tab queue flushes used to let two cycles interleave into the same node. The re-loop timer is kept separate so cycle-N+1 always gets scheduled after cycle-N's cleanup runs.
+    let chatTimers = [];
+    let chatLoopTimer = null;
+    function chatSetTimeout(fn, delay) {
+        const id = setTimeout(fn, delay);
+        chatTimers.push(id);
+        return id;
+    }
+    function clearChatTimers() {
+        chatTimers.forEach(clearTimeout);
+        chatTimers = [];
+    }
+
     // ---- Typewriter utility ----
     function typeText(element, text, speed, callback) {
         let i = 0;
@@ -2533,7 +2546,7 @@
             if (i < text.length) {
                 element.textContent += text.charAt(i);
                 i++;
-                setTimeout(type, speed);
+                chatSetTimeout(type, speed);
             } else if (callback) {
                 callback();
             }
@@ -2543,7 +2556,6 @@
 
     // ---- Chat Demo Animation ----
     const chatDemo = document.getElementById('chatDemo');
-    let chatAnimationTimer = null;
 
     const PROMPT_TEXT = 'Find me the best trainers to do the London Marathon in.';
     const TRACE_TEXTS = [
@@ -2553,6 +2565,11 @@
     ];
 
     function resetChatAnimation() {
+        clearChatTimers();
+        if (chatLoopTimer !== null) {
+            clearTimeout(chatLoopTimer);
+            chatLoopTimer = null;
+        }
         const chatUser = document.getElementById('chatUser');
         const chatBubble = document.getElementById('chatBubble');
         const chatThinking = document.getElementById('chatThinking');
@@ -2588,13 +2605,13 @@
         const chatProduct = document.getElementById('chatProduct');
         const chatBody = document.getElementById('chatBody');
 
-        setTimeout(() => {
+        chatSetTimeout(() => {
             chatUser.classList.add('active');
             typeText(chatBubble, PROMPT_TEXT, 18);
         }, 400);
 
         const promptDuration = PROMPT_TEXT.length * 18 + 600;
-        setTimeout(() => {
+        chatSetTimeout(() => {
             chatThinking.classList.add('active');
             chatBody.scrollTop = chatBody.scrollHeight;
         }, promptDuration);
@@ -2603,7 +2620,7 @@
 
         TRACE_TEXTS.forEach((text, idx) => {
             const traceId = idx + 1;
-            setTimeout(() => {
+            chatSetTimeout(() => {
                 const trace = document.getElementById('trace' + traceId);
                 const traceText = document.getElementById('traceText' + traceId);
                 trace.classList.add('active');
@@ -2615,19 +2632,17 @@
             traceDelay += text.length * 12 + 400;
         });
 
-        setTimeout(() => {
+        chatSetTimeout(() => {
             chatAiText.classList.add('active');
             chatBody.scrollTop = chatBody.scrollHeight;
         }, traceDelay + 400);
 
-        setTimeout(() => {
+        chatSetTimeout(() => {
             chatProduct.classList.add('active');
             chatBody.scrollTop = chatBody.scrollHeight;
         }, traceDelay + 1200);
 
-        chatAnimationTimer = setTimeout(() => {
-            runChatAnimation(); if (chatAnimationTimer) clearTimeout(chatAnimationTimer);
-        }, traceDelay + 1200 + 30000); 
+        chatLoopTimer = setTimeout(runChatAnimation, traceDelay + 1200 + 30000);
     }
 
     const chatObserver = new IntersectionObserver((entries) => {
@@ -2635,6 +2650,14 @@
             if (entry.isIntersecting) {
                 runChatAnimation();
                 chatObserver.unobserve(entry.target);
+                let chatHiddenAt = 0;
+                document.addEventListener('visibilitychange', () => {
+                    if (document.visibilityState === 'hidden') {
+                        chatHiddenAt = Date.now();
+                    } else if (Date.now() - chatHiddenAt > 30000) {
+                        runChatAnimation();
+                    }
+                });
             }
         });
     }, { threshold: 0.25 });
