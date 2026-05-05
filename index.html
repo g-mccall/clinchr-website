@@ -2748,6 +2748,7 @@
                 });
                 const data = await response.json().catch(() => ({}));
 
+                if (submitCancelled) return;
                 if (response.ok && data.success) {
                     formWrap.hidden = true;
                     successWrap.hidden = false;
@@ -2758,6 +2759,7 @@
                     submitBtn.innerHTML = originalLabel;
                 }
             } catch (err) {
+                if (submitCancelled) return;
                 status.textContent = 'Network error. Please try again or email enquiries@clinchr.ai.';
                 status.classList.add('error');
                 submitBtn.disabled = false;
